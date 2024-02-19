@@ -6,7 +6,8 @@
     "typescriptreact"
   ],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
   },
   "prettier.jsxSingleQuote": true,
   "prettier.semi": false,
@@ -35,5 +36,7 @@
   },
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 70
 }
