@@ -43,7 +43,7 @@ export const DataTable: React.FC<DataTableProps> = ({
   const [getCellValue] = useDataTable()
 
   return (
-    <Table className="max-w-2xl text-center">
+    <Table className="mx-auto max-w-2xl text-center">
       <TableCaption>{PRODUCTS.TITLE}</TableCaption>
       <TableHeader>
         <TableRow>
@@ -60,29 +60,26 @@ export const DataTable: React.FC<DataTableProps> = ({
         {data.map((row) => (
           <TableRow key={row[rowIdKey]}>
             {columns.map((col) => {
-              return (
+              return col.key ? (
                 <TableCell key={col.key}>{getCellValue(col, row)}</TableCell>
+              ) : (
+                <TableCell key="actions" className="flex justify-center gap-2">
+                  <Button size="sm" onClick={() => onEditItem(row[rowIdKey])}>
+                    Edit
+                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="destructive" size="sm">
+                        Delete
+                      </Button>
+                    </DialogTrigger>
+                    <DeleteConfirmationDialog
+                      onConfirm={() => onDeleteItem(row[rowIdKey])}
+                    />
+                  </Dialog>
+                </TableCell>
               )
             })}
-            <TableCell key="actions" className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => onEditItem(row[rowIdKey])}
-              >
-                Edit
-              </Button>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button variant="destructive" size="sm">
-                    Delete
-                  </Button>
-                </DialogTrigger>
-                <DeleteConfirmationDialog
-                  onConfirm={() => onDeleteItem(row[rowIdKey])}
-                />
-              </Dialog>
-            </TableCell>
           </TableRow>
         ))}
       </TableBody>

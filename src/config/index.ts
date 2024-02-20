@@ -55,7 +55,8 @@ export const PRODUCTS = {
         key: 'expiryDate',
         headerLabel: 'Expiry Date',
         formatFn: dateStringToFormat
-      }
+      },
+      { key: '', headerLabel: 'Actions' }
     ]
   }
 }
