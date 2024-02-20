@@ -50,7 +50,7 @@ export const PRODUCTS = {
     COLUMNS: [
       { key: 'name', headerLabel: 'Name' },
       { key: 'manufacturer', headerLabel: 'Manufacturer', nestedKey: 'name' },
-      { key: 'price', headerLabel: 'Price' },
+      { key: 'price', headerLabel: 'Price', suffix: '€' },
       {
         key: 'expiryDate',
         headerLabel: 'Expiry Date',

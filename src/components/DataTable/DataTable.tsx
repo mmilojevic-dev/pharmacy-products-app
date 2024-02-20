@@ -1,12 +1,20 @@
-import { Table } from '@/components/Table/Table'
-import { TableBody } from '@/components/Table/TableBody'
-import { TableCell } from '@/components/Table/TableCell'
-import { TableHead } from '@/components/Table/TableHead'
-import { TableHeader } from '@/components/Table/TableHeader'
-import { TableRow } from '@/components/Table/TableRow'
+import { Dialog } from '@radix-ui/react-dialog'
+
+import { Button } from '@/components/Button'
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '@/components/Table'
 import { PRODUCTS } from '@/config'
 
-import { TableCaption } from './Table/TableCaption'
+import { DeleteConfirmationDialog } from '../DeleteConfirmationDialog'
+import { DialogTrigger } from '../Dialog'
+import useDataTable from './useDataTable'
 // TODO: Improve typings here in order to make the component safe and generic
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface DataTableColumn {
@@ -18,21 +26,22 @@ export interface DataTableColumn {
 }
 
 interface DataTableProps {
-  rowIdKey?: string
-  columns: DataTableColumn[]
   data: any[]
+  columns: DataTableColumn[]
+  onEditItem: (id: any) => void
+  onDeleteItem: (id: any) => void
+  rowIdKey?: string
 }
 
 export const DataTable: React.FC<DataTableProps> = ({
   columns,
   data,
+  onEditItem,
+  onDeleteItem,
   rowIdKey = 'id'
 }) => {
-  const getCellValue = (col: DataTableColumn, row: any): string => {
-    const value = col.nestedKey ? row[col.key][col.nestedKey] : row[col.key]
-    const formattedValue = col.formatFn ? col.formatFn(value) : value
-    return col.suffix ? `${formattedValue}${col.suffix}` : formattedValue
-  }
+  const [getCellValue] = useDataTable()
+
   return (
     <Table className="max-w-2xl text-center">
       <TableCaption>{PRODUCTS.TITLE}</TableCaption>
@@ -55,6 +64,25 @@ export const DataTable: React.FC<DataTableProps> = ({
                 <TableCell key={col.key}>{getCellValue(col, row)}</TableCell>
               )
             })}
+            <TableCell key="actions" className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => onEditItem(row[rowIdKey])}
+              >
+                Edit
+              </Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="destructive" size="sm">
+                    Delete
+                  </Button>
+                </DialogTrigger>
+                <DeleteConfirmationDialog
+                  onConfirm={() => onDeleteItem(row[rowIdKey])}
+                />
+              </Dialog>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
