@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { DataTable } from '@/components/Table/DataTable'
+import { DataTable } from '@/components/DataTable'
+import { PRODUCTS } from '@/config'
 import { useProductsContext } from '@/contexts/ProductsContext'
 
 interface IProductsProps {}
@@ -8,11 +9,9 @@ interface IProductsProps {}
 export const Products: React.FC<IProductsProps> = () => {
   const { products } = useProductsContext()
 
-  React.useEffect(() => {
-    console.log(products)
-  }, [products])
+  const columns = PRODUCTS.DATA_TABLE.COLUMNS
 
-  return <DataTable data={products} />
+  return <DataTable columns={columns} data={products} />
 }
 
 Products.displayName = 'Products'

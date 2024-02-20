@@ -1,3 +1,5 @@
+import { dateStringToFormat } from '@/utils/dateStringToFormat'
+
 export const ROUTES = {
   HOME: {
     LABEL: '',
@@ -27,23 +29,35 @@ export const PRODUCTS = {
       name: 'Product1',
       manufacturer: { id: 'manufacturer1', name: 'Manufacturer1' },
       price: 10,
-      expiryDate: new Date('2023-03-01')
+      expiryDate: new Date('2024-03-01')
     },
     {
       id: 'product2',
       name: 'Product2',
       manufacturer: { id: 'manufacturer2', name: 'Manufacturer2' },
       price: 20,
-      expiryDate: new Date('2023-06-15')
+      expiryDate: new Date('2024-06-15')
     },
     {
       id: 'product3',
       name: 'Product3',
       manufacturer: { id: 'manufacturer3', name: 'Manufacturer3' },
       price: 30,
-      expiryDate: new Date('2023-09-28')
+      expiryDate: new Date('2024-09-28')
     }
-  ]
+  ],
+  DATA_TABLE: {
+    COLUMNS: [
+      { key: 'name', headerLabel: 'Name' },
+      { key: 'manufacturer', headerLabel: 'Manufacturer', nestedKey: 'name' },
+      { key: 'price', headerLabel: 'Price' },
+      {
+        key: 'expiryDate',
+        headerLabel: 'Expiry Date',
+        formatFn: dateStringToFormat
+      }
+    ]
+  }
 }
 export const ABOUT = {
   TITLE: 'Products',
