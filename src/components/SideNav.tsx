@@ -24,3 +24,5 @@ export const SideNav: React.FC<ISideNavProps> = () => {
     </aside>
   )
 }
+
+SideNav.displayName = 'SideNav'

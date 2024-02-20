@@ -5,7 +5,7 @@ import { About } from '@/views/About'
 import { Products } from '@/views/Products'
 import { Statistics } from '@/views/Statistics'
 
-import { Layout } from './Layout'
+import { Layout } from '../views/Layout'
 
 export const Router: React.FC = () => {
   return (
@@ -21,3 +21,5 @@ export const Router: React.FC = () => {
     </BrowserRouter>
   )
 }
+
+Router.displayName = 'Router'

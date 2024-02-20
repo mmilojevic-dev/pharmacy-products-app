@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router'
 
-import { SideNav } from './SideNav'
+import { SideNav } from '../components/SideNav'
 
 interface IProductsProps {}
 
@@ -17,3 +17,5 @@ export const Layout: React.FC<IProductsProps> = () => {
     </div>
   )
 }
+
+Layout.displayName = 'Layout'

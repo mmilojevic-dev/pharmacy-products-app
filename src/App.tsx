@@ -1,5 +1,10 @@
-import { Router } from './components/Router'
+import { ProductsProvider } from './contexts/ProductsContext'
+import { Router } from './routing/Router'
 
 export const App: React.FC = () => {
-  return <Router />
+  return (
+    <ProductsProvider>
+      <Router />
+    </ProductsProvider>
+  )
 }
