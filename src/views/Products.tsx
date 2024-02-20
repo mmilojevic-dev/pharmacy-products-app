@@ -1,8 +1,10 @@
 import React from 'react'
 
 import { DataTable } from '@/components/DataTable/DataTable'
+import { ProductForm } from '@/components/ProductForm'
 import { PRODUCTS } from '@/config'
 import { useProductsContext } from '@/contexts/ProductsContext'
+import { IProduct } from '@/models'
 
 interface IProductsProps {}
 
@@ -17,17 +19,27 @@ export const Products: React.FC<IProductsProps> = () => {
   }
 
   const handleDelete = (id: string) => {
-    // Handle delete logic here, e.g., show confirmation modal
     deleteProduct(id)
   }
 
+  const handleFormSubmit = (product: IProduct) => {
+    console.log(product)
+  }
+
   return (
-    <DataTable
-      columns={columns}
-      data={products}
-      onEditItem={handleEdit}
-      onDeleteItem={handleDelete}
-    />
+    <>
+      <DataTable
+        columns={columns}
+        data={products}
+        onEditItem={handleEdit}
+        onDeleteItem={handleDelete}
+      />
+      <ProductForm
+        onSubmit={handleFormSubmit}
+        initialProduct={products[0]}
+        editMode={!!products[0]}
+      />
+    </>
   )
 }
 

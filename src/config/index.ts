@@ -1,5 +1,9 @@
 import { dateStringToFormat } from '@/utils/dateStringToFormat'
 
+export const GENERAL = {
+  CURRENCY: '€'
+}
+
 export const ROUTES = {
   HOME: {
     LABEL: '',
@@ -29,28 +33,28 @@ export const PRODUCTS = {
       name: 'Product1',
       manufacturer: { id: 'manufacturer1', name: 'Manufacturer1' },
       price: 10,
-      expiryDate: new Date('2024-03-01')
+      expiryDate: new Date('2025-02-28T15:45:30.000Z')
     },
     {
       id: 'product2',
       name: 'Product2',
       manufacturer: { id: 'manufacturer2', name: 'Manufacturer2' },
       price: 20,
-      expiryDate: new Date('2024-06-15')
+      expiryDate: new Date('2025-09-15T08:00:00.000Z')
     },
     {
       id: 'product3',
       name: 'Product3',
       manufacturer: { id: 'manufacturer3', name: 'Manufacturer3' },
       price: 30,
-      expiryDate: new Date('2024-09-28')
+      expiryDate: new Date('2026-12-10T18:20:10.000Z')
     }
   ],
   DATA_TABLE: {
     COLUMNS: [
       { key: 'name', headerLabel: 'Name' },
       { key: 'manufacturer', headerLabel: 'Manufacturer', nestedKey: 'name' },
-      { key: 'price', headerLabel: 'Price', suffix: '€' },
+      { key: 'price', headerLabel: 'Price', suffix: GENERAL.CURRENCY },
       {
         key: 'expiryDate',
         headerLabel: 'Expiry Date',
