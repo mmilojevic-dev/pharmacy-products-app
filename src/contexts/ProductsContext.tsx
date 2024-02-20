@@ -6,8 +6,8 @@ import { IProduct } from '@/models'
 
 interface IProductsContext {
   products: IProduct[]
-  addProduct: (newProduct: IProduct) => void
-  updateProduct: (productId: string, updatedProduct: IProduct) => void
+  createProduct: (newProduct: IProduct) => void
+  updateProduct: (updatedProduct: IProduct) => void
   deleteProduct: (productId: string) => void
 }
 
@@ -27,14 +27,14 @@ export const ProductsProvider: React.FC<IProductsProviderProps> = ({
     PRODUCTS.INITIAL_DATA
   )
 
-  const addProduct = (newProduct: IProduct) => {
+  const createProduct = (newProduct: IProduct) => {
     setProducts((prevProducts) => [...prevProducts, newProduct])
   }
 
-  const updateProduct = (productId: string, updatedProduct: IProduct) => {
+  const updateProduct = (updatedProduct: IProduct) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
-        product.id === productId ? updatedProduct : product
+        product.id === updatedProduct.id ? updatedProduct : product
       )
     )
   }
@@ -47,7 +47,7 @@ export const ProductsProvider: React.FC<IProductsProviderProps> = ({
 
   return (
     <ProductsContext.Provider
-      value={{ products, addProduct, updateProduct, deleteProduct }}
+      value={{ products, createProduct, updateProduct, deleteProduct }}
     >
       {children}
     </ProductsContext.Provider>

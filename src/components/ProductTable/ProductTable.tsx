@@ -14,10 +14,11 @@ import { PRODUCTS } from '@/config'
 
 import { DeleteConfirmationDialog } from '../DeleteConfirmationDialog'
 import { DialogTrigger } from '../Dialog'
-import useDataTable from './useDataTable'
+import { UpdateCreateProductDialog } from '../UpdateCreateProductDialog'
+import useProductTable from './useProductTable'
 // TODO: Improve typings here in order to make the component safe and generic
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface DataTableColumn {
+export interface ProductTableColumn {
   key: string
   headerLabel: string
   nestedKey?: string
@@ -25,22 +26,22 @@ export interface DataTableColumn {
   suffix?: string
 }
 
-interface DataTableProps {
+interface ProductTableProps {
   data: any[]
-  columns: DataTableColumn[]
-  onEditItem: (id: any) => void
-  onDeleteItem: (id: any) => void
+  columns: ProductTableColumn[]
+  onDelete: (id: any) => void
+  productFormComponent: React.ReactElement
   rowIdKey?: string
 }
 
-export const DataTable: React.FC<DataTableProps> = ({
+export const ProductTable: React.FC<ProductTableProps> = ({
   columns,
   data,
-  onEditItem,
-  onDeleteItem,
+  onDelete,
+  productFormComponent,
   rowIdKey = 'id'
 }) => {
-  const [getCellValue] = useDataTable()
+  const [getCellValue] = useProductTable()
 
   return (
     <Table className="mx-auto max-w-2xl text-center">
@@ -64,9 +65,14 @@ export const DataTable: React.FC<DataTableProps> = ({
                 <TableCell key={col.key}>{getCellValue(col, row)}</TableCell>
               ) : (
                 <TableCell key="actions" className="flex justify-center gap-2">
-                  <Button size="sm" onClick={() => onEditItem(row[rowIdKey])}>
-                    Edit
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button size="sm">Update</Button>
+                    </DialogTrigger>
+                    <UpdateCreateProductDialog>
+                      {productFormComponent}
+                    </UpdateCreateProductDialog>
+                  </Dialog>
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button variant="destructive" size="sm">
@@ -74,7 +80,7 @@ export const DataTable: React.FC<DataTableProps> = ({
                       </Button>
                     </DialogTrigger>
                     <DeleteConfirmationDialog
-                      onConfirm={() => onDeleteItem(row[rowIdKey])}
+                      onConfirm={() => onDelete(row[rowIdKey])}
                     />
                   </Dialog>
                 </TableCell>
@@ -87,4 +93,4 @@ export const DataTable: React.FC<DataTableProps> = ({
   )
 }
 
-DataTable.displayName = 'DataTable'
+ProductTable.displayName = 'ProductTable'

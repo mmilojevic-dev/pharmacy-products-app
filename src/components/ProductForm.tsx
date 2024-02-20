@@ -9,14 +9,14 @@ import { Input } from './Input'
 
 interface ProductFormProps {
   onSubmit: SubmitHandler<IProduct>
-  editMode: boolean
-  initialProduct?: IProduct
+  updateMode: boolean
+  product?: IProduct
 }
 
 export const ProductForm: React.FC<ProductFormProps> = ({
   onSubmit,
-  editMode,
-  initialProduct = {
+  updateMode,
+  product = {
     id: generateId(),
     name: '',
     manufacturer: {
@@ -32,13 +32,13 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     handleSubmit,
     formState: { errors }
   } = useForm<IProduct>({
-    defaultValues: initialProduct
+    defaultValues: product
   })
 
   const handleFormSubmit = (data: IProduct) => {
     console.log(data)
     onSubmit({
-      ...initialProduct,
+      ...product,
       ...data
     })
   }
@@ -82,8 +82,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       />
       {errors.expiryDate && <span>{errors.expiryDate.message}</span>}
 
-      <Button type="submit" variant={editMode ? 'outline' : 'default'}>
-        {editMode ? 'Update Product' : 'Create Product'}
+      <Button type="submit" variant={updateMode ? 'outline' : 'default'}>
+        {updateMode ? 'Update Product' : 'Create Product'}
       </Button>
     </form>
   )
