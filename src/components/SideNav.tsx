@@ -1,24 +1,38 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
-interface ISideNavProps {}
+import { ROUTES } from '@/config'
+import { cn } from '@/utils/tailwindUtil'
 
-export const SideNav: React.FC<ISideNavProps> = () => {
+export const SideNav = () => {
+  const { pathname } = useLocation()
+  const routesKeys = Object.keys(ROUTES)
+
   return (
     <aside
-      className="col-start-1 col-end-2 row-start-1 row-end-3 bg-primary p-4
-        text-primary-foreground"
+      className="bg-primary p-4 text-center text-primary-foreground md:col-start-1 md:col-end-2
+        md:row-start-1 md:row-end-8"
     >
-      <nav>
-        <ul>
-          <li>
-            <Link to="/products">Products</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/statistics">Statistics</Link>
-          </li>
+      <nav className="mt-5">
+        <ul className="flex items-center justify-center gap-5 md:flex-col">
+          {routesKeys.map((key: string) => {
+            const route = ROUTES[key as keyof typeof ROUTES]
+            return (
+              !route.NAV_ITEM_HIDDEN && (
+                <li key={route.PATH}>
+                  <Link
+                    className={cn(
+                      route.PATH === pathname && 'underline',
+                      'md:text-2xl',
+                      'tracking-widest'
+                    )}
+                    to={route.PATH}
+                  >
+                    {route.LABEL}
+                  </Link>
+                </li>
+              )
+            )
+          })}
         </ul>
       </nav>
     </aside>
