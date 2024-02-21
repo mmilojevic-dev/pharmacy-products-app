@@ -9,6 +9,7 @@ interface IProductsContext {
   createProduct: (newProduct: IProduct) => void
   updateProduct: (updatedProduct: IProduct) => void
   deleteProduct: (productId: string) => void
+  getProductById: (productId: string) => IProduct | undefined
 }
 
 const ProductsContext = React.createContext<IProductsContext | undefined>(
@@ -45,9 +46,19 @@ export const ProductsProvider: React.FC<IProductsProviderProps> = ({
     )
   }
 
+  const getProductById = (productId: string) => {
+    return products.find((product) => product.id === productId)
+  }
+
   return (
     <ProductsContext.Provider
-      value={{ products, createProduct, updateProduct, deleteProduct }}
+      value={{
+        products,
+        createProduct,
+        updateProduct,
+        deleteProduct,
+        getProductById
+      }}
     >
       {children}
     </ProductsContext.Provider>

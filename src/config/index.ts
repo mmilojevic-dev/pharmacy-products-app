@@ -7,19 +7,33 @@ export const GENERAL = {
 export const ROUTES = {
   HOME: {
     LABEL: '',
-    PATH: '/'
+    PATH: '/',
+    NAV_ITEM_HIDDEN: false
   },
   PRODUCTS: {
     LABEL: 'Products',
-    PATH: '/products'
+    PATH: '/products',
+    NAV_ITEM_HIDDEN: false
   },
   ABOUT: {
     LABEL: 'About',
-    PATH: '/about'
+    PATH: '/about',
+    NAV_ITEM_HIDDEN: false
   },
   STATISTICS: {
     LABEL: 'Statistics',
-    PATH: '/statistics'
+    PATH: '/statistics',
+    NAV_ITEM_HIDDEN: false
+  },
+  CREATE_PRODUCT: {
+    LABEL: 'Create New',
+    PATH: '/products/create',
+    NAV_ITEM_HIDDEN: true
+  },
+  UPDATE_PRODUCT: {
+    LABEL: 'Update',
+    PATH: '/products/update',
+    NAV_ITEM_HIDDEN: true
   }
 }
 export const HOME = {

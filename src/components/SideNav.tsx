@@ -5,6 +5,7 @@ import { cn } from '@/utils/tailwindUtil'
 
 export const SideNav = () => {
   const { pathname } = useLocation()
+  const routesKeys = Object.keys(ROUTES)
 
   return (
     <aside
@@ -13,21 +14,23 @@ export const SideNav = () => {
     >
       <nav className="mt-5">
         <ul className="flex items-center justify-center gap-5 md:flex-col">
-          {Object.keys(ROUTES).map((key: string) => {
+          {routesKeys.map((key: string) => {
             const route = ROUTES[key as keyof typeof ROUTES]
             return (
-              <li key={route.PATH}>
-                <Link
-                  className={cn(
-                    route.PATH === pathname && 'underline',
-                    'md:text-2xl',
-                    'tracking-widest'
-                  )}
-                  to={route.PATH}
-                >
-                  {route.LABEL}
-                </Link>
-              </li>
+              !route.NAV_ITEM_HIDDEN && (
+                <li key={route.PATH}>
+                  <Link
+                    className={cn(
+                      route.PATH === pathname && 'underline',
+                      'md:text-2xl',
+                      'tracking-widest'
+                    )}
+                    to={route.PATH}
+                  >
+                    {route.LABEL}
+                  </Link>
+                </li>
+              )
             )
           })}
         </ul>

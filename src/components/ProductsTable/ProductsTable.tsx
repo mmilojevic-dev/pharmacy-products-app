@@ -1,8 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-import { Button } from '@/components/Button'
+import { Button, buttonVariants } from '@/components/Button'
 import { Dialog, DialogTrigger } from '@/components/Dialog'
-import { ProductForm } from '@/components/ProductForm'
 import {
   Table,
   TableBody,
@@ -12,8 +12,7 @@ import {
   TableHeader,
   TableRow
 } from '@/components/Table'
-import { PRODUCTS } from '@/config'
-import { IProduct } from '@/models'
+import { PRODUCTS, ROUTES } from '@/config'
 
 import { DeleteConfirmation } from '../DeleteConfirmation'
 import { useProductsTable } from './useProductsTable'
@@ -31,20 +30,14 @@ export interface ProductsTableColumn {
 interface ProductsTableProps {
   data: any[]
   columns: ProductsTableColumn[]
-  onUpdate: (product: IProduct) => void
   onDelete: (id: any) => void
-  updateModalOpen: boolean
-  onUpdateModalOpenChange: (open: boolean) => void
   rowIdKey?: string
 }
 
 export const ProductsTable: React.FC<ProductsTableProps> = ({
   columns,
   data,
-  onUpdate,
   onDelete,
-  updateModalOpen,
-  onUpdateModalOpenChange,
   rowIdKey = 'id'
 }) => {
   const [getCellValue] = useProductsTable()
@@ -71,17 +64,15 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
                 <TableCell key={col.key}>{getCellValue(col, row)}</TableCell>
               ) : (
                 <TableCell key="actions" className="flex justify-center gap-2">
-                  <Dialog
-                    open={updateModalOpen}
-                    onOpenChange={onUpdateModalOpenChange}
+                  <Link
+                    to={`${ROUTES.UPDATE_PRODUCT.PATH}/${row[rowIdKey]}`}
+                    className={buttonVariants({
+                      variant: 'outline',
+                      size: 'sm'
+                    })}
                   >
-                    <DialogTrigger asChild>
-                      <Button variant="outline" size="sm">
-                        Update
-                      </Button>
-                    </DialogTrigger>
-                    <ProductForm onSubmit={onUpdate} product={row} updateMode />
-                  </Dialog>
+                    {ROUTES.UPDATE_PRODUCT.LABEL}
+                  </Link>
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button variant="destructive" size="sm">
