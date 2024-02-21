@@ -10,16 +10,18 @@ import {
   DialogHeader
 } from './Dialog'
 
-interface DeleteConfirmationDialogProps {
+interface DeleteConfirmationProps {
   onConfirm: () => void
 }
 
-const DeleteConfirmationDialog: React.FC<DeleteConfirmationDialogProps> = ({
+const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({
   onConfirm
 }) => {
   return (
     <DialogContent>
-      <DialogHeader>Delete Confirmation</DialogHeader>
+      <DialogHeader className="items-center">
+        <span>Delete Confirmation</span>
+      </DialogHeader>
       <DialogDescription>
         Are you sure you want to delete this item?
       </DialogDescription>
@@ -37,4 +39,4 @@ const DeleteConfirmationDialog: React.FC<DeleteConfirmationDialogProps> = ({
   )
 }
 
-export { DeleteConfirmationDialog }
+export { DeleteConfirmation }

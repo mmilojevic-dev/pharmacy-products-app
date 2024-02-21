@@ -1,10 +1,16 @@
 import * as React from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { FieldError, SubmitHandler, useForm } from 'react-hook-form'
 
 import { IProduct } from '@/models'
 import { generateId } from '@/utils/generateId'
 
 import { Button } from './Button'
+import {
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader
+} from './Dialog'
 import { Input } from './Input'
 
 interface ProductFormProps {
@@ -27,6 +33,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     expiryDate: new Date()
   }
 }) => {
+  const actionLabel = updateMode ? 'Update' : 'Create'
   const {
     register,
     handleSubmit,
@@ -36,55 +43,83 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   })
 
   const handleFormSubmit = (data: IProduct) => {
-    console.log(data)
     onSubmit({
       ...product,
       ...data
     })
   }
 
+  const getErrorMessage = (field: FieldError) => (
+    <span className="text-destructive">{field.message}</span>
+  )
+
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <Input
-        type="text"
-        placeholder="Product Name"
-        {...register('name', { required: 'Product Name is required' })}
-      />
-      {errors.name && <span>{errors.name.message}</span>}
+    <DialogContent>
+      <DialogHeader className="items-center">
+        <span>{actionLabel} Product</span>
+      </DialogHeader>
+      <DialogDescription>
+        <form
+          onSubmit={handleSubmit(handleFormSubmit)}
+          noValidate
+          autoComplete="off"
+          className="flex flex-col gap-y-4"
+        >
+          <div>
+            <Input
+              className="mb-1"
+              type="text"
+              placeholder="Product Name"
+              {...register('name', { required: 'Product Name is required' })}
+            />
+            {errors.name && getErrorMessage(errors.name)}
+          </div>
 
-      <Input
-        type="text"
-        placeholder="Manufacturer Name"
-        {...register('manufacturer.name', {
-          required: 'Manufacturer Name is required'
-        })}
-      />
-      {errors.manufacturer?.name && (
-        <span>{errors.manufacturer.name.message}</span>
-      )}
+          <div>
+            <Input
+              type="text"
+              placeholder="Manufacturer Name"
+              {...register('manufacturer.name', {
+                required: 'Manufacturer Name is required'
+              })}
+            />
+            {errors.manufacturer?.name &&
+              getErrorMessage(errors.manufacturer?.name)}
+          </div>
 
-      <Input
-        type="number"
-        placeholder="Price"
-        {...register('price', {
-          required: 'Price is required',
-          min: { value: 0, message: 'Price must be a positive number' }
-        })}
-      />
-      {errors.price && <span>{errors.price.message}</span>}
+          <div>
+            <Input
+              type="number"
+              placeholder="Price"
+              {...register('price', {
+                required: 'Price is required',
+                min: { value: 0, message: 'Price must be a positive number' }
+              })}
+            />
+            {errors.price && getErrorMessage(errors.price)}
+          </div>
 
-      <Input
-        type="date"
-        placeholder="Expiry Date"
-        {...register('expiryDate', {
-          required: 'Expiry Date is required'
-        })}
-      />
-      {errors.expiryDate && <span>{errors.expiryDate.message}</span>}
+          <div>
+            <Input
+              type="date"
+              placeholder="Expiry Date"
+              {...register('expiryDate', {
+                required: 'Expiry Date is required'
+              })}
+            />
+            {errors.expiryDate && getErrorMessage(errors.expiryDate)}
+          </div>
 
-      <Button type="submit" variant={updateMode ? 'outline' : 'default'}>
-        {updateMode ? 'Update Product' : 'Create Product'}
-      </Button>
-    </form>
+          <div className="flex justify-end gap-x-2">
+            <Button type="submit" variant={updateMode ? 'outline' : 'default'}>
+              {actionLabel}
+            </Button>
+            <DialogClose asChild>
+              <Button variant="destructive">Cancel</Button>
+            </DialogClose>
+          </div>
+        </form>
+      </DialogDescription>
+    </DialogContent>
   )
 }

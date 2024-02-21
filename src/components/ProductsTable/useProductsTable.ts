@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ProductTableColumn } from './ProductTable'
+import { ProductsTableColumn } from './ProductsTable'
 
-const useProductTable = () => {
+const useProductsTable = () => {
   const getCellValue = (
-    { nestedKey, key, formatFn, suffix }: ProductTableColumn,
+    { nestedKey, key, formatFn, suffix }: ProductsTableColumn,
     row: any
   ) => {
     const value = nestedKey ? row[key]?.[nestedKey] : row[key]
@@ -15,4 +15,4 @@ const useProductTable = () => {
   return [getCellValue]
 }
 
-export default useProductTable
+export default useProductsTable

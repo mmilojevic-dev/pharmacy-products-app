@@ -1,6 +1,8 @@
-import { Dialog } from '@radix-ui/react-dialog'
+import React from 'react'
 
 import { Button } from '@/components/Button'
+import { Dialog, DialogTrigger } from '@/components/Dialog'
+import { ProductForm } from '@/components/ProductForm'
 import {
   Table,
   TableBody,
@@ -11,14 +13,13 @@ import {
   TableRow
 } from '@/components/Table'
 import { PRODUCTS } from '@/config'
+import { IProduct } from '@/models'
 
-import { DeleteConfirmationDialog } from '../DeleteConfirmationDialog'
-import { DialogTrigger } from '../Dialog'
-import { UpdateCreateProductDialog } from '../UpdateCreateProductDialog'
-import useProductTable from './useProductTable'
+import { DeleteConfirmation } from '../DeleteConfirmation'
+import useProductsTable from './useProductsTable'
 // TODO: Improve typings here in order to make the component safe and generic
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface ProductTableColumn {
+export interface ProductsTableColumn {
   key: string
   headerLabel: string
   nestedKey?: string
@@ -26,25 +27,29 @@ export interface ProductTableColumn {
   suffix?: string
 }
 
-interface ProductTableProps {
+interface ProductsTableProps {
   data: any[]
-  columns: ProductTableColumn[]
+  columns: ProductsTableColumn[]
+  onUpdate: (product: IProduct) => void
   onDelete: (id: any) => void
-  productFormComponent: React.ReactElement
+  updateModalOpen: boolean
+  onUpdateModalOpenChange: (open: boolean) => void
   rowIdKey?: string
 }
 
-export const ProductTable: React.FC<ProductTableProps> = ({
+export const ProductsTable: React.FC<ProductsTableProps> = ({
   columns,
   data,
+  onUpdate,
   onDelete,
-  productFormComponent,
+  updateModalOpen,
+  onUpdateModalOpenChange,
   rowIdKey = 'id'
 }) => {
-  const [getCellValue] = useProductTable()
+  const [getCellValue] = useProductsTable()
 
   return (
-    <Table className="mx-auto max-w-2xl text-center">
+    <Table className="text-center">
       <TableCaption>{PRODUCTS.TITLE}</TableCaption>
       <TableHeader>
         <TableRow>
@@ -65,13 +70,16 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                 <TableCell key={col.key}>{getCellValue(col, row)}</TableCell>
               ) : (
                 <TableCell key="actions" className="flex justify-center gap-2">
-                  <Dialog>
+                  <Dialog
+                    open={updateModalOpen}
+                    onOpenChange={onUpdateModalOpenChange}
+                  >
                     <DialogTrigger asChild>
-                      <Button size="sm">Update</Button>
+                      <Button variant="outline" size="sm">
+                        Update
+                      </Button>
                     </DialogTrigger>
-                    <UpdateCreateProductDialog>
-                      {productFormComponent}
-                    </UpdateCreateProductDialog>
+                    <ProductForm onSubmit={onUpdate} product={row} updateMode />
                   </Dialog>
                   <Dialog>
                     <DialogTrigger asChild>
@@ -79,7 +87,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                         Delete
                       </Button>
                     </DialogTrigger>
-                    <DeleteConfirmationDialog
+                    <DeleteConfirmation
                       onConfirm={() => onDelete(row[rowIdKey])}
                     />
                   </Dialog>
@@ -93,4 +101,4 @@ export const ProductTable: React.FC<ProductTableProps> = ({
   )
 }
 
-ProductTable.displayName = 'ProductTable'
+ProductsTable.displayName = 'ProductsTable'

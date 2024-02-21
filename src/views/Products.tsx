@@ -1,10 +1,7 @@
 import React from 'react'
 
-import { Button } from '@/components/Button'
-import { Dialog, DialogTrigger } from '@/components/Dialog'
-import { ProductForm } from '@/components/ProductForm'
-import { ProductTable } from '@/components/ProductTable/ProductTable'
-import { UpdateCreateProductDialog } from '@/components/UpdateCreateProductDialog'
+import { CreateProduct } from '@/components/CreateProduct'
+import { ProductsTable } from '@/components/ProductsTable/ProductsTable'
 import { PRODUCTS } from '@/config'
 import { useProductsContext } from '@/contexts/ProductsContext'
 import { IProduct } from '@/models'
@@ -12,6 +9,8 @@ import { IProduct } from '@/models'
 interface IProductsProps {}
 
 export const Products: React.FC<IProductsProps> = () => {
+  const [createModalOpen, setCreateModalOpen] = React.useState<boolean>(false)
+  const [updateModalOpen, setUpdateModalOpen] = React.useState<boolean>(false)
   const { createProduct, products, updateProduct, deleteProduct } =
     useProductsContext()
 
@@ -19,10 +18,12 @@ export const Products: React.FC<IProductsProps> = () => {
 
   const handleCreate = (newProduct: IProduct) => {
     createProduct(newProduct)
+    setUpdateModalOpen(false)
   }
 
   const handleUpdate = (updatedProduct: IProduct) => {
     updateProduct(updatedProduct)
+    setUpdateModalOpen(false)
   }
 
   const handleDelete = (id: string) => {
@@ -31,25 +32,18 @@ export const Products: React.FC<IProductsProps> = () => {
 
   return (
     <>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button size="sm">Create</Button>
-        </DialogTrigger>
-        <UpdateCreateProductDialog>
-          <ProductForm onSubmit={handleCreate} updateMode={false} />
-        </UpdateCreateProductDialog>
-      </Dialog>
-      <ProductTable
+      <ProductsTable
         columns={columns}
         data={products}
+        onUpdate={handleUpdate}
         onDelete={handleDelete}
-        productFormComponent={
-          <ProductForm
-            onSubmit={handleUpdate}
-            product={products[0]}
-            updateMode
-          />
-        }
+        updateModalOpen={updateModalOpen}
+        onUpdateModalOpenChange={setUpdateModalOpen}
+      />
+      <CreateProduct
+        onCreate={handleCreate}
+        createModalOpen={createModalOpen}
+        onCreateModalOpenChange={setCreateModalOpen}
       />
     </>
   )

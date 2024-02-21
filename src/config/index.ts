@@ -65,7 +65,6 @@ export const PRODUCTS = {
   }
 }
 export const ABOUT = {
-  TITLE: 'Products',
   AUTHOR: 'Miloš Milojević',
   VERSION: '0.1.0',
   APP_NAME: 'Pharmacy Products App',
