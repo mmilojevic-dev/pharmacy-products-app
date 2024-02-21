@@ -48,6 +48,48 @@ export const PRODUCTS = {
       manufacturer: { id: 'manufacturer3', name: 'Manufacturer3' },
       price: 30,
       expiryDate: new Date('2026-12-10T18:20:10.000Z')
+    },
+    {
+      id: 'product4',
+      name: 'Product4',
+      manufacturer: { id: 'manufacturer4', name: 'Manufacturer4' },
+      price: 100,
+      expiryDate: new Date('2025-06-28T15:45:30.000Z')
+    },
+    {
+      id: 'product5',
+      name: 'Product5',
+      manufacturer: { id: 'manufacturer5', name: 'Manufacturer5' },
+      price: 50,
+      expiryDate: new Date('2025-05-18T08:00:00.000Z')
+    },
+    {
+      id: 'product6',
+      name: 'Product6',
+      manufacturer: { id: 'manufacturer6', name: 'Manufacturer6' },
+      price: 77,
+      expiryDate: new Date('2024-12-10T18:20:10.000Z')
+    },
+    {
+      id: 'product7',
+      name: 'Product7',
+      manufacturer: { id: 'manufacturer7', name: 'Manufacturer7' },
+      price: 18,
+      expiryDate: new Date('2027-09-28T15:45:30.000Z')
+    },
+    {
+      id: 'product8',
+      name: 'Product8',
+      manufacturer: { id: 'manufacturer8', name: 'Manufacturer8' },
+      price: 27,
+      expiryDate: new Date('2028-04-11T08:00:00.000Z')
+    },
+    {
+      id: 'product9',
+      name: 'Product9',
+      manufacturer: { id: 'manufacturer9', name: 'Manufacturer9' },
+      price: 33,
+      expiryDate: new Date('2024-06-10T18:20:10.000Z')
     }
   ],
   DATA_TABLE: {
