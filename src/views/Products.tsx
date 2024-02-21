@@ -32,6 +32,11 @@ export const Products: React.FC<IProductsProps> = () => {
 
   return (
     <>
+      <CreateProduct
+        onCreate={handleCreate}
+        createModalOpen={createModalOpen}
+        onCreateModalOpenChange={setCreateModalOpen}
+      />
       <ProductsTable
         columns={columns}
         data={products}
@@ -39,11 +44,6 @@ export const Products: React.FC<IProductsProps> = () => {
         onDelete={handleDelete}
         updateModalOpen={updateModalOpen}
         onUpdateModalOpenChange={setUpdateModalOpen}
-      />
-      <CreateProduct
-        onCreate={handleCreate}
-        createModalOpen={createModalOpen}
-        onCreateModalOpenChange={setCreateModalOpen}
       />
     </>
   )

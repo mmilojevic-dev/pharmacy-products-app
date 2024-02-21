@@ -16,7 +16,8 @@ import { PRODUCTS } from '@/config'
 import { IProduct } from '@/models'
 
 import { DeleteConfirmation } from '../DeleteConfirmation'
-import useProductsTable from './useProductsTable'
+import { useProductsTable } from './useProductsTable'
+
 // TODO: Improve typings here in order to make the component safe and generic
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ProductsTableColumn {

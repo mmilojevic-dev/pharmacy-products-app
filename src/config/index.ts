@@ -88,7 +88,84 @@ export const PRODUCTS = {
       id: 'product9',
       name: 'Product9',
       manufacturer: { id: 'manufacturer9', name: 'Manufacturer9' },
-      price: 33,
+      price: 3,
+      expiryDate: new Date('2024-06-10T18:20:10.000Z')
+    },
+    {
+      id: 'product10',
+      name: 'Product10',
+      manufacturer: { id: 'manufacturer5', name: 'Manufacturer5' },
+      price: 333,
+      expiryDate: new Date('2024-06-10T18:20:10.000Z')
+    },
+    {
+      id: 'product11',
+      name: 'Product11',
+      manufacturer: { id: 'manufacturer2', name: 'Manufacturer2' },
+      price: 4,
+      expiryDate: new Date('2024-06-10T18:20:10.000Z')
+    },
+    {
+      id: 'product12',
+      name: 'Product12',
+      manufacturer: { id: 'manufacturer3', name: 'Manufacturer3' },
+      price: 21,
+      expiryDate: new Date('2024-06-10T18:20:10.000Z')
+    },
+    {
+      id: 'product13',
+      name: 'Product13',
+      manufacturer: { id: 'manufacturer11', name: 'Manufacturer11' },
+      price: 42,
+      expiryDate: new Date('2024-06-10T18:20:10.000Z')
+    },
+    {
+      id: 'product14',
+      name: 'Product14',
+      manufacturer: { id: 'manufacturer9', name: 'Manufacturer9' },
+      price: 1,
+      expiryDate: new Date('2024-06-10T18:20:10.000Z')
+    },
+    {
+      id: 'product15',
+      name: 'Product15',
+      manufacturer: { id: 'manufacturer7', name: 'Manufacturer7' },
+      price: 16,
+      expiryDate: new Date('2024-06-10T18:20:10.000Z')
+    },
+    {
+      id: 'product16',
+      name: 'Product16',
+      manufacturer: { id: 'manufacturer17', name: 'Manufacturer17' },
+      price: 14,
+      expiryDate: new Date('2024-06-10T18:20:10.000Z')
+    },
+    {
+      id: 'product17',
+      name: 'Product17',
+      manufacturer: { id: 'manufacturer12', name: 'Manufacturer12' },
+      price: 5,
+      expiryDate: new Date('2024-06-10T18:20:10.000Z')
+    },
+    {
+      id: 'product18',
+      name: 'Product18',
+      manufacturer: { id: 'manufacturer4', name: 'Manufacturer4' },
+      price: 67,
+      expiryDate: new Date('2024-06-10T18:20:10.000Z')
+    },
+    {
+      id: 'product19',
+      name: 'Product19',
+      manufacturer: { id: 'manufacturer9', name: 'Manufacturer9' },
+      price: 27,
+      expiryDate: new Date('2024-06-10T18:20:10.000Z')
+    },
+    {
+      id: 'product20',
+      name: 'Product20',
+      manufacturer: { id: 'manufacturer91', name: 'Manufacturer91' },
+      price: 19,
       expiryDate: new Date('2024-06-10T18:20:10.000Z')
     }
   ],

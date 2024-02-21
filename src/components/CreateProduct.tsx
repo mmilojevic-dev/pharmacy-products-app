@@ -16,10 +16,12 @@ export const CreateProduct: React.FC<ICreateProduct> = ({
   onCreateModalOpenChange
 }) => {
   return (
-    <div className="mt-10 flex justify-center">
+    <div className="mt-10 flex justify-end">
       <Dialog open={createModalOpen} onOpenChange={onCreateModalOpenChange}>
         <DialogTrigger asChild>
-          <Button size="sm">Create New</Button>
+          <Button className="mr-24" size="lg">
+            Create New
+          </Button>
         </DialogTrigger>
         <ProductForm onSubmit={onCreate} updateMode={false} />
       </Dialog>

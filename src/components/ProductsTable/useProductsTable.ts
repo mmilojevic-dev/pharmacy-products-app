@@ -2,7 +2,7 @@
 
 import { ProductsTableColumn } from './ProductsTable'
 
-const useProductsTable = () => {
+export const useProductsTable = () => {
   const getCellValue = (
     { nestedKey, key, formatFn, suffix }: ProductsTableColumn,
     row: any
@@ -14,5 +14,3 @@ const useProductsTable = () => {
 
   return [getCellValue]
 }
-
-export default useProductsTable
