@@ -17,5 +17,3 @@ export const Layout: React.FC<IProductsProps> = () => {
     </div>
   )
 }
-
-Layout.displayName = 'Layout'

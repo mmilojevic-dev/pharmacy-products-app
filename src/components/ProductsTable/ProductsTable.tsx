@@ -92,5 +92,3 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
     </Table>
   )
 }
-
-ProductsTable.displayName = 'ProductsTable'

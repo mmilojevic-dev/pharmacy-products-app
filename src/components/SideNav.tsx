@@ -38,5 +38,3 @@ export const SideNav = () => {
     </aside>
   )
 }
-
-SideNav.displayName = 'SideNav'

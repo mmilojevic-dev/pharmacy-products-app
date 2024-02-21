@@ -1,6 +1,8 @@
 import { dateStringToFormat } from '@/utils/dateStringToFormat'
 
 export const GENERAL = {
+  PRODUCT: 'Product',
+  PRODUCTS: 'Products',
   CURRENCY: '€'
 }
 

@@ -72,6 +72,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           getErrorMessage(errors.manufacturer?.name)}
       </div>
 
+      {/* TODO: 0 is present as the defaultValue, needs to be improved */}
       <div>
         <Input
           type="number"
@@ -83,7 +84,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         />
         {errors.price && getErrorMessage(errors.price)}
       </div>
-
+      {/* TODO: HTML element Input type Date refuses to read the date from the data and it is not present on Update form mode */}
       <div>
         <Input
           type="date"
@@ -99,7 +100,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         <Button type="submit" variant={product.name ? 'outline' : 'default'}>
           {product.name ? 'Update' : 'Create'}
         </Button>
-        <Button variant="destructive">Cancel</Button>
+        <Button
+          onClick={() => navigate(ROUTES.PRODUCTS.PATH)}
+          variant="destructive"
+        >
+          Cancel
+        </Button>
       </div>
     </form>
   )

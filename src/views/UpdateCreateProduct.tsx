@@ -33,12 +33,14 @@ export const UpdateCreateProduct: React.FC = () => {
   }, [productId, initialProduct, getProductById])
 
   return (
-    <div>
-      <span>{productId ? 'Update' : 'Create'} Product</span>
-      <ProductForm
-        onSubmit={productId ? updateProduct : createProduct}
-        product={selectedProduct}
-      />
+    <div className="flex justify-center">
+      <div className="w-full max-w-2xl text-center">
+        <div className="mb-8">{productId ? 'Update' : 'Create'} Product</div>
+        <ProductForm
+          onSubmit={productId ? updateProduct : createProduct}
+          product={selectedProduct}
+        />
+      </div>
     </div>
   )
 }

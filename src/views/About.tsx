@@ -19,5 +19,3 @@ export const About: React.FC<IAboutProps> = () => {
     </div>
   )
 }
-
-About.displayName = 'About'

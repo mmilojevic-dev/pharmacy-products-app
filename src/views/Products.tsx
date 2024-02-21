@@ -37,5 +37,3 @@ export const Products: React.FC<IProductsProps> = () => {
     </>
   )
 }
-
-Products.displayName = 'Products'

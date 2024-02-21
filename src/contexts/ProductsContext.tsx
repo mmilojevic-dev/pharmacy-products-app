@@ -65,8 +65,6 @@ export const ProductsProvider: React.FC<IProductsProviderProps> = ({
   )
 }
 
-ProductsProvider.displayName = 'ProductsProvider'
-
 type IUseProductContext = IProductsContext
 
 export const useProductsContext = (): IUseProductContext => {
